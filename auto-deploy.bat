@@ -1,11 +1,14 @@
 @echo off
-REM Automated Deployment Script - Just double-click to deploy!
+REM Automated Deployment Script
 setlocal
 
-set VM_IP=103.194.228.182
-set VM_USER=root
-set VM_PASS=W6VITJXH7XPXQWjg
-set VM_PATH=~/test/saarthix-test
+REM Load credentials from .credentials file
+for /f "tokens=1,2 delims==" %%a in (.credentials) do (
+    if "%%a"=="VM_IP" set VM_IP=%%b
+    if "%%a"=="VM_USER" set VM_USER=%%b
+    if "%%a"=="VM_PASS" set VM_PASS=%%b
+    if "%%a"=="VM_PATH" set VM_PATH=%%b
+)
 
 echo ========================================
 echo SaarthiX Test - Automated Deployment
@@ -18,7 +21,7 @@ REM Check for PuTTY plink (most reliable for Windows)
 where plink >nul 2>&1
 if not errorlevel 1 (
     echo [*] Using PuTTY plink...
-    plink -ssh %VM_USER%@%VM_IP% -pw %VM_PASS% -batch ^
+    echo y | plink -ssh %VM_USER%@%VM_IP% -pw %VM_PASS% -batch ^
         "cd %VM_PATH% && " ^
         "echo '[*] Stopping existing containers...' && " ^
         "docker-compose down && " ^

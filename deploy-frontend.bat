@@ -2,10 +2,13 @@
 REM Quick Frontend Deployment Script
 setlocal
 
-set VM_IP=103.194.228.182
-set VM_USER=root
-set VM_PASS=W6VITJXH7XPXQWjg
-set VM_PATH=/root/test/saarthix-test
+REM Load credentials from .credentials file
+for /f "tokens=1,2 delims==" %%a in (.credentials) do (
+    if "%%a"=="VM_IP" set VM_IP=%%b
+    if "%%a"=="VM_USER" set VM_USER=%%b
+    if "%%a"=="VM_PASS" set VM_PASS=%%b
+    if "%%a"=="VM_PATH" set VM_PATH=%%b
+)
 
 echo ========================================
 echo Frontend Deployment

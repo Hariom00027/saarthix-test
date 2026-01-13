@@ -69,8 +69,10 @@ git push origin main
 Run this command from your **local terminal**:
 
 ```cmd
-.\plink.exe -ssh root@103.194.228.182 -pw W6VITJXH7XPXQWjg -t "cd ~/test/saarthix-test && git pull origin main && docker-compose down && docker-compose up --build -d"
+.\plink.exe -ssh root@103.194.228.182 -pw YOUR_PASSWORD -t "cd ~/test/saarthix-test && git pull origin main && docker-compose down && docker-compose up --build -d"
 ```
+
+*Note: Replace `YOUR_PASSWORD` with your actual server password from `.credentials` file*
 
 #### Step 3: Verify
 Visit http://saarthix.com to see your changes.
@@ -82,7 +84,7 @@ Visit http://saarthix.com to see your changes.
 ### Site Shows 502 Bad Gateway
 **Fix:** Restart containers
 ```cmd
-echo y | .\plink.exe -ssh root@103.194.228.182 -pw W6VITJXH7XPXQWjg "cd ~/test/saarthix-test && docker-compose restart"
+echo y | .\plink.exe -ssh root@103.194.228.182 -pw YOUR_PASSWORD "cd ~/test/saarthix-test && docker-compose restart"
 ```
 
 ### Changes Not Showing Up
@@ -90,12 +92,12 @@ echo y | .\plink.exe -ssh root@103.194.228.182 -pw W6VITJXH7XPXQWjg "cd ~/test/s
 
 ### Check Container Status
 ```cmd
-echo y | .\plink.exe -ssh root@103.194.228.182 -pw W6VITJXH7XPXQWjg "docker ps"
+echo y | .\plink.exe -ssh root@103.194.228.182 -pw YOUR_PASSWORD "docker ps"
 ```
 
 ### View Container Logs
 ```cmd
-echo y | .\plink.exe -ssh root@103.194.228.182 -pw W6VITJXH7XPXQWjg "cd ~/test/saarthix-test && docker-compose logs --tail=50 frontend-test"
+echo y | .\plink.exe -ssh root@103.194.228.182 -pw YOUR_PASSWORD "cd ~/test/saarthix-test && docker-compose logs --tail=50 frontend-test"
 ```
 
 Replace `frontend-test` with `backend-test` or `mongodb-test` as needed.
@@ -110,11 +112,13 @@ Replace `frontend-test` with `backend-test` or `mongodb-test` as needed.
 
 3. **Database Changes**: MongoDB data persists in a Docker volume. To reset the database:
    ```cmd
-   echo y | .\plink.exe -ssh root@103.194.228.182 -pw W6VITJXH7XPXQWjg "cd ~/test/saarthix-test && docker-compose down -v && docker-compose up -d"
+   echo y | .\plink.exe -ssh root@103.194.228.182 -pw YOUR_PASSWORD "cd ~/test/saarthix-test && docker-compose down -v && docker-compose up -d"
    ```
    ⚠️ **Warning**: This deletes all data!
 
 4. **SSL Certificate**: Renews automatically. If issues occur, run:
    ```cmd
-   .\plink.exe -ssh root@103.194.228.182 -pw W6VITJXH7XPXQWjg -t "certbot renew"
+   .\plink.exe -ssh root@103.194.228.182 -pw YOUR_PASSWORD -t "certbot renew"
    ```
+
+5. **Security**: Server credentials are stored in `.credentials` file. This file is gitignored and should never be committed to GitHub.
