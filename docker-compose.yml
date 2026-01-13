@@ -25,11 +25,11 @@ services:
     environment:
       - MONGODB_URI=mongodb://mongodb-test:27017/saarthitest
     healthcheck:
-      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost:8081/health || exit 1"]
-      interval: 20s
-      timeout: 5s
-      retries: 8
-      start_period: 120s
+      test: ["CMD-SHELL", "nc -z localhost 8081"]
+      interval: 10s
+      timeout: 3s
+      retries: 20
+      start_period: 240s
     dns:
       - 8.8.8.8
       - 8.8.4.4
