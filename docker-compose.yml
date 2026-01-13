@@ -25,10 +25,11 @@ services:
       - MONGODB_URI=mongodb://mongodb-test:27017/saarthitest
     healthcheck:
       test: ["CMD-SHELL", "nc -z localhost 8081 || exit 1"]
-      interval: 15s
-      timeout: 5s
-      retries: 30
-      start_period: 300s
+      interval: 20s
+      timeout: 10s
+      retries: 40
+      start_period: 360s
+    restart: unless-stopped
     dns:
       - 8.8.8.8
       - 8.8.4.4

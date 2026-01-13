@@ -1,0 +1,25 @@
+# Run these commands to diagnose the backend issue:
+
+# 1. Check all containers (including stopped ones)
+docker ps -a
+
+# 2. Check backend container logs (all logs, not just tail)
+docker-compose logs backend-test
+
+# 3. Check if container is running
+docker ps | grep backend
+
+# 4. Try to start backend manually to see errors
+docker-compose up backend-test
+
+# 5. Check container exit code
+docker inspect saarthix-test_backend-test_1 | grep -i exit
+
+# 6. Check if port 8081 is listening inside container
+docker exec saarthix-test_backend-test_1 nc -z localhost 8081 || echo "Port not listening"
+
+# 7. Check Java process
+docker exec saarthix-test_backend-test_1 ps aux | grep java
+
+# 8. Check if MongoDB is accessible from backend
+docker exec saarthix-test_backend-test_1 ping -c 2 mongodb-test
