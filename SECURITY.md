@@ -28,8 +28,10 @@ Press Enter when asked for passphrase (or set one for extra security).
 
 ### Step 2: Copy Public Key to Server
 ```cmd
-type %USERPROFILE%\.ssh\saarthix_deploy.pub | .\plink.exe -ssh root@103.194.228.182 -pw W6VITJXH7XPXQWjg "cat >> ~/.ssh/authorized_keys"
+type %USERPROFILE%\.ssh\saarthix_deploy.pub | .\plink.exe -ssh root@103.194.228.182 -pw YOUR_PASSWORD "cat >> ~/.ssh/authorized_keys"
 ```
+
+*Note: Replace `YOUR_PASSWORD` with the password from your `.credentials` file*
 
 ### Step 3: Update Scripts to Use Key Instead of Password
 
@@ -75,8 +77,9 @@ If you accidentally commit the password to GitHub:
 
 ## Current Password Location
 
-⚠️ **IMPORTANT**: Your current server password `W6VITJXH7XPXQWjg` is stored in:
+⚠️ **IMPORTANT**: Your server password is stored in:
 - `.credentials` file (safe - gitignored)
-- This `SECURITY.md` file (for reference)
 
 **Action Required**: Consider changing this password and switching to SSH keys for better security.
+
+**To view your password**: Open the `.credentials` file in your project directory.
