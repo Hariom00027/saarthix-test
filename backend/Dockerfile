@@ -23,8 +23,8 @@ FROM eclipse-temurin:17-jdk-alpine
 
 WORKDIR /app
 
-# Install wget for healthcheck
-RUN apk add --no-cache wget
+# Install wget and netcat for healthcheck
+RUN apk add --no-cache wget netcat-openbsd
 
 # Copy all JARs to a temporary directory
 COPY --from=build /app/build/libs/*.jar /app/
@@ -40,5 +40,8 @@ RUN find /app -maxdepth 1 -name "*.jar" ! -name "*-plain.jar" -exec mv {} app.ja
 
 EXPOSE 8081
 
-CMD ["java", "-jar", "app.jar"]
+# Add JVM options for better container performance
+ENV JAVA_OPTS="-Xmx512m -Xms256m"
+
+CMD ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
 

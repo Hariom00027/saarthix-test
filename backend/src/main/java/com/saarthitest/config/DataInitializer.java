@@ -14,10 +14,15 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if (comingSoonRepository.count() == 0) {
-            ComingSoon comingSoon = new ComingSoon("We're coming soon! Stay tuned for exciting updates.");
-            comingSoonRepository.save(comingSoon);
-            System.out.println("Initialized coming soon message in database");
+        try {
+            if (comingSoonRepository.count() == 0) {
+                ComingSoon comingSoon = new ComingSoon("We're coming soon! Stay tuned for exciting updates.");
+                comingSoonRepository.save(comingSoon);
+                System.out.println("Initialized coming soon message in database");
+            }
+        } catch (Exception e) {
+            System.err.println("Warning: Could not initialize data - " + e.getMessage());
+            // Don't fail startup if MongoDB is temporarily unavailable
         }
     }
 }
