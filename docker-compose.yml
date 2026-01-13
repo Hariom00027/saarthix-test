@@ -7,9 +7,7 @@ services:
       - "3001:80"
     depends_on:
       - backend-test
-    dns:
-      - 8.8.8.8
-      - 8.8.4.4
+
   backend-test:
     build:
       context: ./backend
@@ -30,9 +28,7 @@ services:
       retries: 20
       start_period: 180s
     restart: unless-stopped
-    dns:
-      - 8.8.8.8
-      - 8.8.4.4
+
   mongodb-test:
     image: mongo:6
     ports:
@@ -46,9 +42,7 @@ services:
       timeout: 5s
       retries: 5
       start_period: 40s
-    dns:
-      - 8.8.8.8
-      - 8.8.4.4
+
 
 volumes:
   mongo-test-data:
