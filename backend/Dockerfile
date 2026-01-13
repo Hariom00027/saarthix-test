@@ -40,8 +40,16 @@ RUN find /app -maxdepth 1 -name "*.jar" ! -name "*-plain.jar" -exec mv {} app.ja
 
 EXPOSE 8081
 
-# Add JVM options for better container performance
-ENV JAVA_OPTS="-Xmx512m -Xms256m"
+# Add JVM options for better container performance and startup
+ENV JAVA_OPTS="-Xmx512m -Xms256m -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -Djava.security.egd=file:/dev/./urandom"
+
+# Health check script
+RUN echo '#!/bin/sh' > /app/healthcheck.sh && \
+    echo 'nc -z localhost 8081' >> /app/healthcheck.sh && \
+    chmod +x /app/healthcheck.sh
+
+HEALTHCHECK --interval=15s --timeout=5s --start-period=120s --retries=10 \
+    CMD /app/healthcheck.sh || exit 1
 
 CMD ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
 

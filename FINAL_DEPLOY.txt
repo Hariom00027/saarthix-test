@@ -1,0 +1,48 @@
+# FINAL PRODUCTION-READY DEPLOYMENT COMMANDS
+# Copy and paste these commands into your SSH session:
+
+cd ~/test/saarthix-test
+
+# Stop everything
+docker-compose down
+
+# Clean up any old containers
+docker ps -a | grep -E 'saarthix|mongo' | awk '{print $1}' | xargs -r docker rm -f
+
+# Clean up port conflicts
+lsof -ti:27018 | xargs -r kill -9 2>/dev/null || fuser -k 27018/tcp 2>/dev/null || true
+lsof -ti:8081 | xargs -r kill -9 2>/dev/null || fuser -k 8081/tcp 2>/dev/null || true
+lsof -ti:3001 | xargs -r kill -9 2>/dev/null || fuser -k 3001/tcp 2>/dev/null || true
+
+# Deploy all services
+docker-compose up --build -d
+
+# Wait for services to start
+echo "Waiting for services to start..."
+sleep 45
+
+# Check status
+echo "=== Container Status ==="
+docker-compose ps
+
+echo ""
+echo "=== All Containers ==="
+docker ps -a
+
+echo ""
+echo "=== Backend Logs (last 30 lines) ==="
+docker-compose logs --tail=30 backend-test
+
+echo ""
+echo "=== Testing Backend Health ==="
+curl -f http://localhost:8081/health && echo " - Backend is healthy!" || echo " - Backend not responding yet"
+
+echo ""
+echo "=== Final Status ==="
+docker-compose ps
+
+echo ""
+echo "Your application should be available at:"
+echo "  Frontend: http://103.149.162.194:3001"
+echo "  Backend: http://103.149.162.194:8081"
+echo "  Health: http://103.149.162.194:8081/health"
