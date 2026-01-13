@@ -17,7 +17,7 @@ const LandingPage = () => {
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const res = await axios.get('http://localhost:8081/api/beta/count');
+        const res = await axios.get('/api/beta/count');
         setInterestedCount(res.data);
       } catch (err) {
         console.error("Failed to fetch count", err);

@@ -2,7 +2,7 @@
 REM Automated Deployment Script - Just double-click to deploy!
 setlocal
 
-set VM_IP=103.149.162.194
+set VM_IP=103.194.228.182
 set VM_USER=root
 set VM_PASS=W6VITJXH7XPXQWjg
 set VM_PATH=~/test/saarthix-test

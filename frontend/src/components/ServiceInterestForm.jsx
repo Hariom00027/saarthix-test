@@ -62,7 +62,7 @@ const ServiceInterestForm = ({ onClose, role, betaUserId, email }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         // Check if at least one service has been rated
         if (Object.keys(serviceInterests).length === 0) {
             alert('Please rate at least one service before submitting.');
@@ -71,7 +71,7 @@ const ServiceInterestForm = ({ onClose, role, betaUserId, email }) => {
 
         setLoading(true);
         try {
-            await axios.post('http://localhost:8081/api/service-interest/submit', {
+            await axios.post('/api/service-interest/submit', {
                 betaUserId: betaUserId,
                 email: email,
                 role: role,
@@ -152,18 +152,18 @@ const ServiceInterestForm = ({ onClose, role, betaUserId, email }) => {
                             borderRadius: '12px',
                             border: '1px solid var(--glass-border)'
                         }}>
-                            <h3 style={{ 
-                                color: 'white', 
-                                fontSize: '1.1rem', 
+                            <h3 style={{
+                                color: 'white',
+                                fontSize: '1.1rem',
                                 marginBottom: '1rem',
                                 fontWeight: '600'
                             }}>
                                 {service.title}
                             </h3>
-                            
-                            <div style={{ 
-                                display: 'flex', 
-                                gap: '1rem', 
+
+                            <div style={{
+                                display: 'flex',
+                                gap: '1rem',
                                 flexWrap: 'wrap'
                             }}>
                                 {interestOptions.map((option) => {
@@ -177,8 +177,8 @@ const ServiceInterestForm = ({ onClose, role, betaUserId, email }) => {
                                                 padding: '0.6rem 1.2rem',
                                                 borderRadius: '8px',
                                                 border: `2px solid ${isSelected ? option.color : 'rgba(255, 255, 255, 0.2)'}`,
-                                                background: isSelected 
-                                                    ? `${option.color}20` 
+                                                background: isSelected
+                                                    ? `${option.color}20`
                                                     : 'transparent',
                                                 color: isSelected ? option.color : 'var(--text-muted)',
                                                 cursor: 'pointer',
@@ -214,12 +214,12 @@ const ServiceInterestForm = ({ onClose, role, betaUserId, email }) => {
                     <button
                         type="submit"
                         className="btn-primary"
-                        style={{ 
-                            marginTop: '1rem', 
-                            width: '100%', 
-                            display: 'flex', 
-                            alignItems: 'center', 
-                            justifyContent: 'center', 
+                        style={{
+                            marginTop: '1rem',
+                            width: '100%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
                             gap: '0.5rem',
                             padding: '1rem'
                         }}

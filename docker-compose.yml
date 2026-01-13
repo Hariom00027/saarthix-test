@@ -30,14 +30,14 @@ services:
     restart: unless-stopped
 
   mongodb-test:
-    image: mongo:6
+    image: mongo:4.4
     ports:
       - "27018:27017"
     volumes:
       - mongo-test-data:/data/db
     command: ["--quiet"]
     healthcheck:
-      test: mongosh --eval "db.adminCommand('ping')" --quiet
+      test: mongo --eval "db.adminCommand('ping')" --quiet
       interval: 10s
       timeout: 5s
       retries: 5

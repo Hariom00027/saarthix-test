@@ -26,7 +26,7 @@ const BetaClubForm = ({ onClose, role }) => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.post('http://localhost:8081/api/beta/join', {
+            const response = await axios.post('/api/beta/join', {
                 ...formData,
                 role: role
             });
