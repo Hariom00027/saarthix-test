@@ -1,0 +1,21 @@
+# Run these commands on your server to diagnose the issue:
+
+# Check backend logs
+docker-compose logs backend-test
+
+# Check all logs
+docker-compose logs
+
+# Check container status
+docker ps -a
+
+# Check backend container health
+docker inspect saarthix-test_backend-test_1 | grep -A 10 Health
+
+# Try to access the backend container
+docker exec -it saarthix-test_backend-test_1 sh
+
+# Inside the container, test the health endpoint:
+# wget http://localhost:8081/health
+# or
+# nc -z localhost 8081

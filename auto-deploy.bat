@@ -60,7 +60,15 @@ if not errorlevel 1 (
 REM Fallback: Use regular SSH (will prompt for password)
 echo [*] Using SSH (you'll be prompted for password: %VM_PASS%)...
 echo.
-ssh -o StrictHostKeyChecking=no -o ConnectTimeout=30 %VM_USER%@%VM_IP% ^
+echo [!] If connection times out, please deploy manually:
+echo [!] 1. SSH manually: ssh %VM_USER%@%VM_IP%
+echo [!] 2. Run: cd %VM_PATH%
+echo [!] 3. Run: docker-compose down
+echo [!] 4. Run: docker-compose up --build -d
+echo [!] 5. Run: docker-compose ps
+echo.
+echo Attempting connection (this may timeout)...
+ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 -o ServerAliveInterval=5 %VM_USER%@%VM_IP% ^
     "cd %VM_PATH% && docker-compose down && docker ps -a | grep mongo | awk '{print \$1}' | xargs -r docker rm -f 2>/dev/null || true && fuser -k 27018/tcp 2>/dev/null || lsof -ti:27018 | xargs -r kill -9 2>/dev/null || true && docker-compose up --build -d && sleep 20 && docker-compose ps"
 
 :end

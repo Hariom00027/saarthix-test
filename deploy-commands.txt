@@ -1,0 +1,31 @@
+# Copy and paste these commands into your SSH session:
+
+cd ~/test/saarthix-test
+
+# Stop everything
+docker-compose down
+
+# Clean up
+docker ps -a | grep mongo | awk '{print $1}' | xargs -r docker rm -f
+lsof -ti:27018 | xargs -r kill -9 2>/dev/null || fuser -k 27018/tcp 2>/dev/null || true
+
+# Deploy
+docker-compose up --build -d
+
+# Wait and check status
+sleep 30
+docker-compose ps
+
+# Check backend logs if unhealthy
+docker-compose logs backend-test | tail -50
+
+# Check if backend is actually running
+docker ps
+
+# Test backend manually
+curl http://localhost:8081/health || echo "Backend not responding"
+
+# Your app will be available at:
+# Frontend: http://103.149.162.194:3001
+# Backend: http://103.149.162.194:8081
+# Health: http://103.149.162.194:8081/health
