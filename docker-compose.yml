@@ -6,7 +6,8 @@ services:
     ports:
       - "3001:80"
     depends_on:
-      - backend-test
+      backend-test:
+        condition: service_healthy
     dns:
       - 8.8.8.8
       - 8.8.4.4
@@ -23,6 +24,12 @@ services:
         condition: service_healthy
     environment:
       - MONGODB_URI=mongodb://mongodb-test:27017/saarthitest
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8081/api/test/coming-soon"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
     dns:
       - 8.8.8.8
       - 8.8.4.4

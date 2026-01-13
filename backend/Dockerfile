@@ -23,6 +23,9 @@ FROM eclipse-temurin:17-jdk-alpine
 
 WORKDIR /app
 
+# Install wget for healthcheck
+RUN apk add --no-cache wget
+
 # Copy all JARs to a temporary directory
 COPY --from=build /app/build/libs/*.jar /app/
 
