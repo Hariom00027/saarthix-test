@@ -23,7 +23,17 @@ FROM eclipse-temurin:17-jdk-alpine
 
 WORKDIR /app
 
-COPY --from=build /app/build/libs/*.jar app.jar
+# Copy all JARs to a temporary directory
+COPY --from=build /app/build/libs/*.jar /app/
+
+# Find and rename the boot JAR (exclude plain JARs)
+# Spring Boot creates both *-SNAPSHOT.jar (boot JAR) and *-SNAPSHOT-plain.jar
+RUN find /app -maxdepth 1 -name "*.jar" ! -name "*-plain.jar" -exec mv {} app.jar \; && \
+    if [ ! -f app.jar ]; then \
+        echo "ERROR: Boot JAR not found!" && \
+        ls -la /app/*.jar && \
+        exit 1; \
+    fi
 
 EXPOSE 8081
 
