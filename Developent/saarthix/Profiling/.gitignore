@@ -1,0 +1,100 @@
+####################################
+# Build & Dependency Artifacts
+####################################
+/build/
+/target/
+.gradle/
+node_modules/
+dist/
+coverage/
+
+####################################
+# Gradle Wrapper (keep this)
+####################################
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+####################################
+# Logs & Runtime Files
+####################################
+*.log
+*.log.*
+logs/
+**/logs/
+*.pid
+*.seed
+*.gz
+*.zip
+
+####################################
+# Environment & Secrets
+####################################
+.env
+.env.*
+!.env.example
+.env.local
+.env.production
+.env.development
+*.key
+*.pem
+*.p12
+*.jks
+*.keystore
+secrets/
+credentials/
+application-*.yml
+application-*.properties
+!application.properties
+!application.yml
+
+####################################
+# OS Files
+####################################
+.DS_Store
+Thumbs.db
+
+####################################
+# IntelliJ IDEA
+####################################
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+####################################
+# Eclipse / STS
+####################################
+.classpath
+.project
+.settings/
+.factorypath
+.springBeans
+.sts4-cache/
+bin/
+
+####################################
+# VS Code
+####################################
+.vscode/
+
+####################################
+# Test & Temp Files
+####################################
+tmp/
+temp/
+*.swp
+*.swo
+
+####################################
+# Frontend (React / Next / Vite)
+####################################
+.next/
+.cache/
+.eslintcache
+
+####################################
+# Optional: Ignore compiled files
+####################################
+*.class
+deployment/
