@@ -18,3 +18,7 @@ frontend/.vite/
 .DS_Store
 Thumbs.db
 
+# Deployment
+Deployement/
+.credentials
+
