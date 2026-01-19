@@ -2,81 +2,164 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav style={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '1rem 3rem',
-      backgroundColor: '#1a1a1a', // 10% lighter than black background
-      borderBottom: '1px solid var(--glass-border)',
-      boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
-      backdropFilter: 'blur(12px)',
-      WebkitBackdropFilter: 'blur(12px)',
-      position: 'relative',
-      zIndex: 100
-    }}>
-      {/* Logo */}
-      <Link to="/" style={{
-        fontSize: '1.5rem',
-        fontWeight: 'bold',
-        background: 'var(--gradient-main)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
-        backgroundClip: 'text',
-        textDecoration: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.5rem',
-        transition: 'opacity 0.2s'
-      }}
-      onMouseEnter={(e) => e.target.style.opacity = '0.8'}
-      onMouseLeave={(e) => e.target.style.opacity = '1'}
-      >
-        <div style={{
-          width: '40px',
-          height: '40px',
-          borderRadius: '50%',
-          backgroundColor: 'white',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '6px',
-          transition: 'transform 0.3s ease',
-          cursor: 'pointer'
-        }}
-        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
-        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-        >
-          <img 
-            src="/logo.png" 
-            alt="SaarthiX Logo" 
-            style={{ 
-              height: '100%', 
-              width: '100%',
-              objectFit: 'contain'
-            }}
-          />
-        </div>
-        SaarthiX
-      </Link>
+    <>
+      <style>
+        {`
+          .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            background-color: #1a1a1a;
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: relative;
+            z-index: 100;
+          }
 
-      {/* Center Navigation */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-        <Link to="/about" style={{
-          color: 'var(--text)',
-          textDecoration: 'none',
-          fontSize: '1rem',
-          fontWeight: '500',
-          transition: 'color 0.2s',
-          padding: '0.5rem 0'
-        }}
-        onMouseEnter={(e) => e.target.style.color = 'var(--primary)'}
-        onMouseLeave={(e) => e.target.style.color = 'var(--text)'}
-        >
-          About Us
+          @media (max-width: 768px) {
+            .navbar-container {
+              padding: 1rem 2rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .navbar-container {
+              padding: 0.875rem 1rem;
+            }
+          }
+
+          .navbar-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.2s;
+          }
+
+          .navbar-logo:hover {
+            opacity: 0.8;
+          }
+
+          @media (max-width: 480px) {
+            .navbar-logo {
+              font-size: 1.25rem;
+              gap: 0.375rem;
+            }
+          }
+
+          @media (max-width: 360px) {
+            .navbar-logo {
+              font-size: 1.1rem;
+            }
+          }
+
+          .navbar-logo-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+          }
+
+          .navbar-logo-circle:hover {
+            transform: scale(1.1);
+          }
+
+          @media (max-width: 480px) {
+            .navbar-logo-circle {
+              width: 36px;
+              height: 36px;
+              padding: 5px;
+            }
+          }
+
+          @media (max-width: 360px) {
+            .navbar-logo-circle {
+              width: 32px;
+              height: 32px;
+              padding: 4px;
+            }
+          }
+
+          .navbar-logo-img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+          }
+
+          .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+          }
+
+          @media (max-width: 480px) {
+            .navbar-nav {
+              gap: 1rem;
+            }
+          }
+
+          .navbar-link {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 0.5rem 0;
+          }
+
+          .navbar-link:hover {
+            color: var(--primary);
+          }
+
+          @media (max-width: 480px) {
+            .navbar-link {
+              font-size: 0.9rem;
+            }
+          }
+
+          @media (max-width: 360px) {
+            .navbar-link {
+              font-size: 0.85rem;
+            }
+          }
+        `}
+      </style>
+      <nav className="navbar-container">
+        {/* Logo */}
+        <Link to="/" className="navbar-logo">
+          <div className="navbar-logo-circle">
+            <img 
+              src="/logo.png" 
+              alt="SaarthiX Logo" 
+              className="navbar-logo-img"
+            />
+          </div>
+          SaarthiX
         </Link>
-      </div>
-    </nav>
+
+        {/* Center Navigation */}
+        <div className="navbar-nav">
+          <Link to="/about" className="navbar-link">
+            About Us
+          </Link>
+        </div>
+      </nav>
+    </>
   );
 };
 

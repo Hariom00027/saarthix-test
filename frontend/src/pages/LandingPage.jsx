@@ -145,6 +145,77 @@ const LandingPage = () => {
 
   return (
     <>
+      <style>
+        {`
+          .landing-page-container {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+          }
+
+          @media (max-width: 768px) {
+            .landing-page-container {
+              padding: 1.5rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .landing-page-container {
+              padding: 1rem;
+            }
+          }
+
+          .visitors-count-badge {
+            padding: 0.8rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+          }
+
+          @media (max-width: 768px) {
+            .visitors-count-badge {
+              position: static;
+              margin: 0 auto 2rem;
+              justify-content: center;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .visitors-count-badge {
+              padding: 0.6rem 1rem;
+              gap: 0.75rem;
+              font-size: 0.875rem;
+            }
+          }
+
+          .visitors-count-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+          }
+
+          @media (max-width: 480px) {
+            .visitors-count-label {
+              font-size: 0.8rem;
+            }
+          }
+
+          .visitors-count-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+          }
+
+          @media (max-width: 480px) {
+            .visitors-count-number {
+              font-size: 1.25rem;
+            }
+          }
+        `}
+      </style>
       {/* Star Field Background */}
       <div className="star-field">
         {/* Static twinkling stars */}
@@ -180,83 +251,168 @@ const LandingPage = () => {
         ))}
       </div>
       
-      <div style={{ padding: '2rem', maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+      <div className="landing-page-container">
       {/* Total Interested Users - Top Right */}
-      <div className="glass-panel" style={{ 
-        padding: '0.8rem 1.5rem', 
-        display: 'inline-flex', 
-        alignItems: 'center', 
-        gap: '1rem',
-        position: 'absolute',
-        top: '2rem',
-        right: '2rem'
-      }}>
-        <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Visitors count:</span>
-        <span className="title-gradient" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+      <div className="glass-panel visitors-count-badge">
+        <span className="visitors-count-label">Visitors count:</span>
+        <span className="title-gradient visitors-count-number">
           {interestedCount.toLocaleString()}
         </span>
       </div>
 
       {/* Hero Section */}
-      <div style={{ textAlign: 'center', marginBottom: '5rem', marginTop: '2rem' }}>
-        <h1 style={{ 
-          fontSize: '4rem', 
-          marginBottom: '1.5rem', 
-          letterSpacing: '-2px',
-          color: '#ffffff',
-          fontWeight: '700',
-          textShadow: '0 0 20px rgba(99, 102, 241, 0.5), 0 0 40px rgba(236, 72, 153, 0.3)'
-        }}>
+      <style>
+        {`
+          .landing-hero {
+            text-align: center;
+            margin-bottom: 5rem;
+            margin-top: 2rem;
+          }
+
+          @media (max-width: 768px) {
+            .landing-hero {
+              margin-top: 1rem;
+              margin-bottom: 3rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .landing-hero {
+              margin-top: 0.5rem;
+              margin-bottom: 2rem;
+            }
+          }
+
+          .landing-hero-title {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            color: #ffffff;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(99, 102, 241, 0.5), 0 0 40px rgba(236, 72, 153, 0.3);
+          }
+
+          @media (max-width: 768px) {
+            .landing-hero-title {
+              font-size: 2.5rem;
+              letter-spacing: -1px;
+              margin-bottom: 1rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .landing-hero-title {
+              font-size: 2rem;
+              letter-spacing: -0.5px;
+            }
+          }
+
+          @media (max-width: 360px) {
+            .landing-hero-title {
+              font-size: 1.75rem;
+            }
+          }
+
+          .landing-hero-text {
+            color: var(--text-muted);
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+          }
+
+          @media (max-width: 768px) {
+            .landing-hero-text {
+              font-size: 1.1rem;
+              line-height: 1.6;
+              margin-bottom: 1.5rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .landing-hero-text {
+              font-size: 1rem;
+              line-height: 1.5;
+            }
+          }
+
+          @media (max-width: 360px) {
+            .landing-hero-text {
+              font-size: 0.95rem;
+            }
+          }
+        `}
+      </style>
+      <div className="landing-hero">
+        <h1 className="landing-hero-title">
           Welcome to SaarthiX
         </h1>
-        <p style={{ color: 'var(--text-muted)', fontSize: '1.3rem', maxWidth: '800px', margin: '0 auto 2rem', lineHeight: '1.8' }}>
+        <p className="landing-hero-text">
           Empowering Industries, Institutes, and Students with comprehensive solutions for career growth, talent acquisition, and institutional excellence.
         </p>
 
+        <style>
+          {`
+            .landing-hero-btn {
+              font-size: 1.1rem;
+              padding: 1rem 2.5rem;
+              display: inline-flex;
+              align-items: center;
+              gap: 0.5rem;
+              margin-top: 1.5rem;
+              background: transparent;
+              color: #ffffff;
+              border: 2px solid rgba(99, 102, 241, 0.6);
+              border-radius: 50px;
+              font-weight: 500;
+              cursor: pointer;
+              transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+              position: relative;
+              overflow: hidden;
+              letter-spacing: 0.5px;
+              text-transform: uppercase;
+              backdrop-filter: blur(10px);
+              -webkit-backdrop-filter: blur(10px);
+            }
+
+            .landing-hero-btn:hover {
+              border-color: rgba(99, 102, 241, 1);
+              background: rgba(99, 102, 241, 0.1);
+              transform: translateY(-2px);
+              box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+            }
+
+            .landing-hero-btn:active {
+              transform: translateY(0);
+            }
+
+            @media (max-width: 768px) {
+              .landing-hero-btn {
+                font-size: 1rem;
+                padding: 0.875rem 2rem;
+                margin-top: 1rem;
+              }
+            }
+
+            @media (max-width: 480px) {
+              .landing-hero-btn {
+                font-size: 0.9rem;
+                padding: 0.75rem 1.5rem;
+                letter-spacing: 0.3px;
+              }
+            }
+
+            @media (max-width: 360px) {
+              .landing-hero-btn {
+                font-size: 0.85rem;
+                padding: 0.7rem 1.25rem;
+              }
+            }
+          `}
+        </style>
         <button
           onClick={handleShowServices}
-          style={{ 
-            fontSize: '1.1rem', 
-            padding: '1rem 2.5rem',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            marginTop: '1.5rem',
-            background: 'transparent',
-            color: '#ffffff',
-            border: '2px solid rgba(99, 102, 241, 0.6)',
-            borderRadius: '50px',
-            fontWeight: '500',
-            cursor: 'pointer',
-            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-            position: 'relative',
-            overflow: 'hidden',
-            letterSpacing: '0.5px',
-            textTransform: 'uppercase',
-            backdropFilter: 'blur(10px)',
-            WebkitBackdropFilter: 'blur(10px)'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 1)';
-            e.currentTarget.style.background = 'rgba(99, 102, 241, 0.1)';
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 8px 25px rgba(99, 102, 241, 0.3)';
-            const arrow = e.currentTarget.querySelector('svg');
-            if (arrow) {
-              arrow.style.transform = 'translateX(8px) rotate(-45deg)';
-              arrow.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.6)';
-            e.currentTarget.style.background = 'transparent';
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = 'none';
-            const arrow = e.currentTarget.querySelector('svg');
-            if (arrow) {
-              arrow.style.transform = 'translateX(0) rotate(0deg)';
-            }
-          }}
+          className="landing-hero-btn"
         >
           <span>Show Services</span>
           <ArrowRight size={18} style={{ transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }} />
@@ -264,22 +420,79 @@ const LandingPage = () => {
       </div>
 
       {/* Problems Section */}
-      <div style={{ marginBottom: '5rem' }}>
-        <h2 style={{
-          textAlign: 'center',
-          fontSize: '2.5rem',
-          marginBottom: '3rem',
-          color: 'white'
-        }}>
+      <style>
+        {`
+          .landing-section {
+            margin-bottom: 5rem;
+          }
+
+          @media (max-width: 768px) {
+            .landing-section {
+              margin-bottom: 3rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .landing-section {
+              margin-bottom: 2rem;
+            }
+          }
+
+          .landing-section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: white;
+          }
+
+          @media (max-width: 768px) {
+            .landing-section-title {
+              font-size: 2rem;
+              margin-bottom: 2rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .landing-section-title {
+              font-size: 1.75rem;
+              margin-bottom: 1.5rem;
+            }
+          }
+
+          @media (max-width: 360px) {
+            .landing-section-title {
+              font-size: 1.5rem;
+            }
+          }
+
+          .landing-problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+          }
+
+          @media (max-width: 768px) {
+            .landing-problems-grid {
+              grid-template-columns: 1fr;
+              gap: 1.5rem;
+              margin-bottom: 2rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .landing-problems-grid {
+              gap: 1rem;
+            }
+          }
+        `}
+      </style>
+      <div className="landing-section">
+        <h2 className="landing-section-title">
           <span className="title-gradient">Challenges</span> We Solve
         </h2>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-          gap: '2rem',
-          marginBottom: '3rem'
-        }}>
+        <div className="landing-problems-grid">
           {userGroups.map((group, index) => (
             <div key={index} className="glass-panel" style={{ padding: '2rem' }}>
               <div style={{
@@ -327,23 +540,82 @@ const LandingPage = () => {
       </div>
 
       {/* Services Overview Section */}
-      <div style={{ marginBottom: '5rem' }}>
-        <h2 style={{
-          textAlign: 'center',
-          fontSize: '2.5rem',
-          marginBottom: '1rem',
-          color: 'white'
-        }}>
+      <style>
+        {`
+          .landing-services-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+          }
+
+          @media (max-width: 768px) {
+            .landing-services-subtitle {
+              font-size: 1rem;
+              margin-bottom: 2rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .landing-services-subtitle {
+              font-size: 0.95rem;
+              padding: 0 1rem;
+            }
+          }
+
+          .landing-services-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+          }
+
+          @media (max-width: 768px) {
+            .landing-services-container {
+              gap: 1.25rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .landing-services-container {
+              gap: 1rem;
+              flex-direction: column;
+            }
+          }
+
+          .landing-service-card {
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+            cursor: default;
+            min-width: 280px;
+            max-width: 320px;
+            flex: 0 1 auto;
+          }
+
+          @media (max-width: 768px) {
+            .landing-service-card {
+              min-width: 240px;
+              max-width: 280px;
+              padding: 1.25rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .landing-service-card {
+              min-width: 100%;
+              max-width: 100%;
+              padding: 1rem;
+            }
+          }
+        `}
+      </style>
+      <div className="landing-section">
+        <h2 className="landing-section-title">
           Our <span className="title-gradient">Services</span>
         </h2>
-        <p style={{
-          textAlign: 'center',
-          color: 'var(--text-muted)',
-          fontSize: '1.1rem',
-          marginBottom: '3rem',
-          maxWidth: '700px',
-          margin: '0 auto 3rem'
-        }}>
+        <p className="landing-services-subtitle">
           Comprehensive solutions tailored for each user group. Click "Show Services" to explore detailed offerings and choose your path.
         </p>
 
@@ -368,21 +640,9 @@ const LandingPage = () => {
               <h3 style={{ fontSize: '1.8rem', color: 'white' }}>{group.name} Services</h3>
             </div>
 
-            <div style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              gap: '1.5rem'
-            }}>
+            <div className="landing-services-container">
               {group.services.map((service, serviceIndex) => (
-                <div key={serviceIndex} className="glass-panel" style={{
-                  padding: '1.5rem',
-                  transition: 'transform 0.3s ease',
-                  cursor: 'default',
-                  minWidth: '280px',
-                  maxWidth: '320px',
-                  flex: '0 1 auto'
-                }}
+                <div key={serviceIndex} className="glass-panel landing-service-card"
                 onMouseOver={(e) => {
                   e.currentTarget.style.transform = 'translateY(-5px)';
                   e.currentTarget.style.borderColor = group.color;
@@ -429,37 +689,114 @@ const LandingPage = () => {
       </div>
 
       {/* CTA Section */}
-      <div style={{
-        textAlign: 'center',
-        padding: '3rem',
-        background: 'var(--gradient-main)',
-        borderRadius: '1.5rem',
-        marginBottom: '3rem'
-      }}>
-        <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'white' }}>
+      <style>
+        {`
+          .landing-cta {
+            text-align: center;
+            padding: 3rem;
+            background: var(--gradient-main);
+            border-radius: 1.5rem;
+            margin-bottom: 3rem;
+          }
+
+          @media (max-width: 768px) {
+            .landing-cta {
+              padding: 2.5rem 2rem;
+              margin-bottom: 2rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .landing-cta {
+              padding: 2rem 1.5rem;
+              border-radius: 1rem;
+            }
+          }
+
+          .landing-cta-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+          }
+
+          @media (max-width: 768px) {
+            .landing-cta-title {
+              font-size: 1.75rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .landing-cta-title {
+              font-size: 1.5rem;
+            }
+          }
+
+          .landing-cta-text {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+          }
+
+          @media (max-width: 768px) {
+            .landing-cta-text {
+              font-size: 1rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .landing-cta-text {
+              font-size: 0.95rem;
+            }
+          }
+
+          .landing-cta-btn {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s ease;
+          }
+
+          .landing-cta-btn:hover {
+            transform: scale(1.05);
+          }
+
+          .landing-cta-btn:active {
+            transform: scale(0.98);
+          }
+
+          @media (max-width: 768px) {
+            .landing-cta-btn {
+              padding: 0.875rem 2.5rem;
+              font-size: 1rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .landing-cta-btn {
+              padding: 0.75rem 2rem;
+              font-size: 0.95rem;
+            }
+          }
+        `}
+      </style>
+      <div className="landing-cta">
+        <h2 className="landing-cta-title">
           Ready to Get Started?
         </h2>
-        <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.1rem', marginBottom: '2rem' }}>
+        <p className="landing-cta-text">
           Choose your user type and explore our comprehensive services tailored for you.
         </p>
         <button
           onClick={handleShowServices}
-          style={{
-            background: 'white',
-            color: 'var(--primary)',
-            border: 'none',
-            padding: '1rem 3rem',
-            borderRadius: '0.5rem',
-            fontSize: '1.1rem',
-            fontWeight: '600',
-            cursor: 'pointer',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            transition: 'transform 0.2s ease'
-          }}
-          onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-          onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          className="landing-cta-btn"
         >
           Show Services <ArrowRight size={20} />
         </button>
