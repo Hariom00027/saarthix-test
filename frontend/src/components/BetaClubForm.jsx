@@ -110,26 +110,56 @@ const BetaClubForm = ({ onClose, role }) => {
     }
 
     return (
-        <div className="modal-overlay">
-            <div className="glass-panel" style={{
-                padding: '2.5rem',
-                width: '100%',
-                maxWidth: '500px',
-                position: 'relative',
-                maxHeight: '90vh',
-                overflowY: 'auto'
-            }}>
+        <>
+            <style>
+                {`
+                    .beta-form-panel {
+                        padding: 2.5rem;
+                        width: 100%;
+                        max-width: 500px;
+                        position: relative;
+                        max-height: 90vh;
+                        overflow-y: auto;
+                    }
+
+                    @media (max-width: 768px) {
+                        .beta-form-panel {
+                            padding: 2rem;
+                            max-width: 90%;
+                        }
+                    }
+
+                    @media (max-width: 480px) {
+                        .beta-form-panel {
+                            padding: 1.5rem;
+                            max-width: 95%;
+                            max-height: 85vh;
+                        }
+                    }
+
+                    .beta-form-close-btn {
+                        position: absolute;
+                        top: 1.5rem;
+                        right: 1.5rem;
+                        background: none;
+                        border: none;
+                        color: var(--text-muted);
+                        cursor: pointer;
+                    }
+
+                    @media (max-width: 480px) {
+                        .beta-form-close-btn {
+                            top: 1rem;
+                            right: 1rem;
+                        }
+                    }
+                `}
+            </style>
+            <div className="modal-overlay">
+                <div className="glass-panel beta-form-panel">
                 <button
                     onClick={onClose}
-                    style={{
-                        position: 'absolute',
-                        top: '1.5rem',
-                        right: '1.5rem',
-                        background: 'none',
-                        border: 'none',
-                        color: 'var(--text-muted)',
-                        cursor: 'pointer'
-                    }}
+                    className="beta-form-close-btn"
                 >
                     <X size={24} />
                 </button>
@@ -240,6 +270,7 @@ const BetaClubForm = ({ onClose, role }) => {
                 </form>
             </div>
         </div>
+        </>
     );
 };
 

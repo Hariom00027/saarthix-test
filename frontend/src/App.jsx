@@ -79,36 +79,72 @@ function App() {
       {/* Floating Contact Us Button */}
       <button
         onClick={() => setShowContactPopup(!showContactPopup)}
-        style={{
-          position: 'fixed',
-          bottom: '2rem',
-          right: '2rem',
-          width: '60px',
-          height: '60px',
-          borderRadius: '50%',
-          background: showContactPopup 
-            ? 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)'
-            : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'white',
-          boxShadow: '0 4px 20px rgba(99, 102, 241, 0.4)',
-          zIndex: 1000,
-          cursor: 'pointer',
-          border: 'none',
-          transition: 'transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'scale(1.1)';
-          e.currentTarget.style.boxShadow = '0 6px 25px rgba(99, 102, 241, 0.6)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'scale(1)';
-          e.currentTarget.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.4)';
-        }}
+        className="floating-contact-btn"
         title="Contact Us"
       >
+        <style>
+          {`
+            .floating-contact-btn {
+              position: fixed;
+              bottom: 2rem;
+              right: 2rem;
+              width: 60px;
+              height: 60px;
+              border-radius: 50%;
+              background: ${showContactPopup 
+                ? 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)'
+                : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'};
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: white;
+              box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+              z-index: 1000;
+              cursor: pointer;
+              border: none;
+              transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            }
+
+            .floating-contact-btn:hover {
+              transform: scale(1.1);
+              box-shadow: 0 6px 25px rgba(99, 102, 241, 0.6);
+            }
+
+            .floating-contact-btn:active {
+              transform: scale(0.95);
+            }
+
+            /* Tablet Styles */
+            @media (max-width: 768px) and (min-width: 481px) {
+              .floating-contact-btn {
+                width: 56px;
+                height: 56px;
+                bottom: 1.5rem;
+                right: 1.5rem;
+              }
+            }
+
+            /* Mobile Styles */
+            @media (max-width: 480px) {
+              .floating-contact-btn {
+                width: 52px;
+                height: 52px;
+                bottom: 1.25rem;
+                right: 1.25rem;
+              }
+            }
+
+            /* Small Mobile Styles */
+            @media (max-width: 360px) {
+              .floating-contact-btn {
+                width: 48px;
+                height: 48px;
+                bottom: 1rem;
+                right: 1rem;
+              }
+            }
+          `}
+        </style>
         <Phone size={24} />
       </button>
     </Router>

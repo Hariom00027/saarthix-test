@@ -23,22 +23,7 @@ const ContactPopup = ({ isOpen, onClose }) => {
 
       {/* Chat Popup */}
       <div
-        style={{
-          position: 'fixed',
-          bottom: '5.5rem',
-          right: '2rem',
-          width: '380px',
-          maxHeight: '600px',
-          backgroundColor: 'var(--surface)',
-          borderRadius: '1.5rem',
-          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)',
-          zIndex: 1000,
-          display: 'flex',
-          flexDirection: 'column',
-          border: '1px solid var(--glass-border)',
-          overflow: 'hidden',
-          animation: 'slideUp 0.3s ease-out',
-        }}
+        className="contact-popup-container"
         onClick={(e) => e.stopPropagation()}
       >
         <style>
@@ -53,141 +38,372 @@ const ContactPopup = ({ isOpen, onClose }) => {
                 transform: translateY(0);
               }
             }
+
+            @keyframes slideUpMobile {
+              from {
+                opacity: 0;
+                transform: translateY(100%);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+
+            .contact-popup-container {
+              position: fixed;
+              bottom: 5.5rem;
+              right: 2rem;
+              width: 380px;
+              max-height: 600px;
+              backgroundColor: var(--surface);
+              border-radius: 1.5rem;
+              box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+              z-index: 1000;
+              display: flex;
+              flex-direction: column;
+              border: 1px solid var(--glass-border);
+              overflow: hidden;
+              animation: slideUp 0.3s ease-out;
+            }
+
+            /* Tablet Styles (481px - 768px) */
+            @media (max-width: 768px) and (min-width: 481px) {
+              .contact-popup-container {
+                width: 90%;
+                max-width: 420px;
+                right: 50%;
+                transform: translateX(50%);
+                bottom: 1rem;
+                max-height: 70vh;
+                border-radius: 1.25rem;
+              }
+            }
+
+            /* Mobile Styles (up to 480px) */
+            @media (max-width: 480px) {
+              .contact-popup-container {
+                width: 100%;
+                max-width: 100%;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                max-height: 85vh;
+                border-radius: 1.5rem 1.5rem 0 0;
+                animation: slideUpMobile 0.3s ease-out;
+              }
+            }
+
+            /* Small Mobile Styles (up to 360px) */
+            @media (max-width: 360px) {
+              .contact-popup-container {
+                max-height: 90vh;
+              }
+            }
           `}
         </style>
 
         {/* Chat Header */}
-        <div
-          style={{
-            background: 'var(--gradient-main)',
-            padding: '1.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            color: 'white',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div
-              style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
+        <div className="contact-popup-header">
+          <style>
+            {`
+              .contact-popup-header {
+                background: var(--gradient-main);
+                padding: 1.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                color: white;
+              }
+
+              @media (max-width: 480px) {
+                .contact-popup-header {
+                  padding: 1.25rem 1rem;
+                }
+              }
+
+              .contact-popup-header-content {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+              }
+
+              @media (max-width: 360px) {
+                .contact-popup-header-content {
+                  gap: 0.75rem;
+                }
+              }
+
+              .contact-popup-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: rgba(255, 255, 255, 0.2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+
+              @media (max-width: 360px) {
+                .contact-popup-icon {
+                  width: 36px;
+                  height: 36px;
+                }
+              }
+
+              .contact-popup-title {
+                margin: 0;
+                font-size: 1.1rem;
+                font-weight: 600;
+              }
+
+              @media (max-width: 480px) {
+                .contact-popup-title {
+                  font-size: 1rem;
+                }
+              }
+
+              .contact-popup-subtitle {
+                margin: 0;
+                font-size: 0.85rem;
+                opacity: 0.9;
+              }
+
+              @media (max-width: 480px) {
+                .contact-popup-subtitle {
+                  font-size: 0.8rem;
+                }
+              }
+
+              .contact-popup-close-btn {
+                background: rgba(255, 255, 255, 0.2);
+                border: none;
+                border-radius: 50%;
+                width: 32px;
+                height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                color: white;
+                transition: background 0.2s;
+              }
+
+              .contact-popup-close-btn:hover {
+                background: rgba(255, 255, 255, 0.3);
+              }
+
+              @media (max-width: 360px) {
+                .contact-popup-close-btn {
+                  width: 28px;
+                  height: 28px;
+                }
+              }
+            `}
+          </style>
+          <div className="contact-popup-header-content">
+            <div className="contact-popup-icon">
               <MessageCircle size={20} />
             </div>
             <div>
-              <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: '600' }}>
+              <h3 className="contact-popup-title">
                 Contact Us
               </h3>
-              <p style={{ margin: 0, fontSize: '0.85rem', opacity: 0.9 }}>
+              <p className="contact-popup-subtitle">
                 We're here to help!
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            style={{
-              background: 'rgba(255, 255, 255, 0.2)',
-              border: 'none',
-              borderRadius: '50%',
-              width: '32px',
-              height: '32px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              color: 'white',
-              transition: 'background 0.2s',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
-            }}
+            className="contact-popup-close-btn"
           >
             <X size={18} />
           </button>
         </div>
 
         {/* Chat Body */}
-        <div
-          style={{
-            padding: '1.5rem',
-            overflowY: 'auto',
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-          }}
-        >
+        <div className="contact-popup-body">
+          <style>
+            {`
+              .contact-popup-body {
+                padding: 1.5rem;
+                overflow-y: auto;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+              }
+
+              @media (max-width: 480px) {
+                .contact-popup-body {
+                  padding: 1.25rem 1rem;
+                  gap: 0.875rem;
+                }
+              }
+
+              .contact-popup-welcome {
+                padding: 1rem;
+                background: rgba(99, 102, 241, 0.1);
+                border-radius: 1rem;
+                border: 1px solid var(--glass-border);
+              }
+
+              @media (max-width: 480px) {
+                .contact-popup-welcome {
+                  padding: 0.875rem;
+                  border-radius: 0.875rem;
+                }
+              }
+
+              .contact-popup-welcome p {
+                margin: 0;
+                color: var(--text);
+                line-height: 1.6;
+                font-size: 0.95rem;
+              }
+
+              @media (max-width: 480px) {
+                .contact-popup-welcome p {
+                  font-size: 0.875rem;
+                  line-height: 1.5;
+                }
+              }
+
+              .contact-cards-container {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+              }
+
+              @media (max-width: 480px) {
+                .contact-cards-container {
+                  gap: 0.875rem;
+                }
+              }
+            `}
+          </style>
           {/* Welcome Message */}
-          <div
-            style={{
-              padding: '1rem',
-              background: 'rgba(99, 102, 241, 0.1)',
-              borderRadius: '1rem',
-              border: '1px solid var(--glass-border)',
-            }}
-          >
-            <p style={{ margin: 0, color: 'var(--text)', lineHeight: '1.6' }}>
+          <div className="contact-popup-welcome">
+            <p>
               Hi! 👋 How can we help you today? Feel free to reach out using any of the contact methods below.
             </p>
           </div>
 
           {/* Contact Information Cards */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div className="contact-cards-container">
+            <style>
+              {`
+                .contact-card {
+                  display: flex;
+                  align-items: center;
+                  gap: 1rem;
+                  padding: 1rem;
+                  background: var(--glass);
+                  border-radius: 0.75rem;
+                  border: 1px solid var(--glass-border);
+                  text-decoration: none;
+                  color: var(--text);
+                  transition: all 0.2s;
+                  cursor: pointer;
+                }
+
+                @media (max-width: 480px) {
+                  .contact-card {
+                    padding: 0.875rem;
+                    gap: 0.875rem;
+                  }
+                }
+
+                .contact-card:hover {
+                  background: rgba(99, 102, 241, 0.1);
+                  transform: translateX(4px);
+                }
+
+                @media (max-width: 480px) {
+                  .contact-card:hover {
+                    transform: translateX(2px);
+                  }
+                }
+
+                .contact-card:active {
+                  transform: scale(0.98);
+                }
+
+                .contact-card-icon {
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 50%;
+                  background: var(--gradient-main);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                  flex-shrink: 0;
+                }
+
+                @media (max-width: 480px) {
+                  .contact-card-icon {
+                    width: 36px;
+                    height: 36px;
+                  }
+                }
+
+                .contact-card-content {
+                  flex: 1;
+                  min-width: 0;
+                }
+
+                .contact-card-title {
+                  margin: 0;
+                  font-size: 0.95rem;
+                  color: var(--text);
+                  font-weight: 600;
+                }
+
+                @media (max-width: 480px) {
+                  .contact-card-title {
+                    font-size: 0.875rem;
+                  }
+                }
+
+                .contact-card-text {
+                  margin: 0.25rem 0 0 0;
+                  font-size: 0.85rem;
+                  color: var(--text-muted);
+                  line-height: 1.5;
+                  word-break: break-word;
+                }
+
+                @media (max-width: 480px) {
+                  .contact-card-text {
+                    font-size: 0.8rem;
+                  }
+                }
+
+                .contact-card-static {
+                  cursor: default;
+                }
+
+                .contact-card-static:hover {
+                  background: var(--glass);
+                  transform: none;
+                }
+              `}
+            </style>
             {/* Phone */}
             <a
               href="tel:+917899257840"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '1rem',
-                padding: '1rem',
-                background: 'var(--glass)',
-                borderRadius: '0.75rem',
-                border: '1px solid var(--glass-border)',
-                textDecoration: 'none',
-                color: 'var(--text)',
-                transition: 'all 0.2s',
-                cursor: 'pointer',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(99, 102, 241, 0.1)';
-                e.currentTarget.style.transform = 'translateX(4px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'var(--bg-primary)';
-                e.currentTarget.style.transform = 'translateX(0)';
-              }}
+              className="contact-card"
             >
-              <div
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  background: 'var(--gradient-main)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  flexShrink: 0,
-                }}
-              >
+              <div className="contact-card-icon">
                 <Phone size={18} />
               </div>
-              <div style={{ flex: 1 }}>
-                <h4 style={{ margin: 0, fontSize: '0.95rem', color: 'var(--text)' }}>
+              <div className="contact-card-content">
+                <h4 className="contact-card-title">
                   Phone
                 </h4>
-                <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                <p className="contact-card-text">
                   +91 7899257840
                 </p>
               </div>
@@ -196,85 +412,31 @@ const ContactPopup = ({ isOpen, onClose }) => {
             {/* Email */}
             <a
               href="mailto:support@nattlabs.com"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '1rem',
-                padding: '1rem',
-                background: 'var(--glass)',
-                borderRadius: '0.75rem',
-                border: '1px solid var(--glass-border)',
-                textDecoration: 'none',
-                color: 'var(--text)',
-                transition: 'all 0.2s',
-                cursor: 'pointer',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(99, 102, 241, 0.1)';
-                e.currentTarget.style.transform = 'translateX(4px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'var(--bg-primary)';
-                e.currentTarget.style.transform = 'translateX(0)';
-              }}
+              className="contact-card"
             >
-              <div
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  background: 'var(--gradient-main)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  flexShrink: 0,
-                }}
-              >
+              <div className="contact-card-icon">
                 <Mail size={18} />
               </div>
-              <div style={{ flex: 1 }}>
-                <h4 style={{ margin: 0, fontSize: '0.95rem', color: 'var(--text)' }}>
+              <div className="contact-card-content">
+                <h4 className="contact-card-title">
                   Email
                 </h4>
-                <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                <p className="contact-card-text">
                   support@nattlabs.com
                 </p>
               </div>
             </a>
 
             {/* Address */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '1rem',
-                padding: '1rem',
-                background: 'var(--glass)',
-                borderRadius: '0.75rem',
-                border: '1px solid var(--glass-border)',
-              }}
-            >
-              <div
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  background: 'var(--gradient-main)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  flexShrink: 0,
-                }}
-              >
+            <div className="contact-card contact-card-static">
+              <div className="contact-card-icon">
                 <MapPin size={18} />
               </div>
-              <div style={{ flex: 1 }}>
-                <h4 style={{ margin: 0, fontSize: '0.95rem', color: 'var(--text)' }}>
+              <div className="contact-card-content">
+                <h4 className="contact-card-title">
                   Address
                 </h4>
-                <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: '1.5' }}>
+                <p className="contact-card-text">
                   1705, 19th Main Road, Sector 2,<br />
                   HSR Layout, Bengaluru, 560102,<br />
                   India
@@ -283,37 +445,15 @@ const ContactPopup = ({ isOpen, onClose }) => {
             </div>
 
             {/* Business Hours */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '1rem',
-                padding: '1rem',
-                background: 'var(--glass)',
-                borderRadius: '0.75rem',
-                border: '1px solid var(--glass-border)',
-              }}
-            >
-              <div
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  background: 'var(--gradient-main)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  flexShrink: 0,
-                }}
-              >
+            <div className="contact-card contact-card-static">
+              <div className="contact-card-icon">
                 <Clock size={18} />
               </div>
-              <div style={{ flex: 1 }}>
-                <h4 style={{ margin: 0, fontSize: '0.95rem', color: 'var(--text)' }}>
+              <div className="contact-card-content">
+                <h4 className="contact-card-title">
                   Business Hours
                 </h4>
-                <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: '1.5' }}>
+                <p className="contact-card-text">
                   Mon - Fri: 9:00 AM - 6:00 PM<br />
                   Sat: 10:00 AM - 4:00 PM
                 </p>
