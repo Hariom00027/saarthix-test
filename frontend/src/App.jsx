@@ -6,6 +6,7 @@ import LandingPage from "./pages/LandingPage";
 import SelectRole from "./pages/SelectRole";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Dashboard from "./pages/Dashboard";
 import BetaClubForm from "./components/BetaClubForm";
 import ContactPopup from "./components/ContactPopup";
 
@@ -73,6 +74,10 @@ function App() {
         <Route
           path="/about"
           element={<About />}
+        />
+        <Route
+          path="/dashboard"
+          element={<Dashboard />}
         />
       </Routes>
 

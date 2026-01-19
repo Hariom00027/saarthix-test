@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -40,6 +41,11 @@ public class ServiceInterestController {
         return serviceInterestService.getServiceInterestsByEmail(email)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ServiceInterest>> getAllServiceInterests() {
+        return ResponseEntity.ok(serviceInterestService.getAllServiceInterests());
     }
 
     // Inner class for request body

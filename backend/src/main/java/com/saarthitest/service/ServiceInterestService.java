@@ -5,6 +5,7 @@ import com.saarthitest.repository.ServiceInterestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -40,6 +41,10 @@ public class ServiceInterestService {
 
     public Optional<ServiceInterest> getServiceInterestsByBetaUserId(String betaUserId) {
         return serviceInterestRepository.findByBetaUserId(betaUserId);
+    }
+
+    public List<ServiceInterest> getAllServiceInterests() {
+        return serviceInterestRepository.findAll();
     }
 }
 

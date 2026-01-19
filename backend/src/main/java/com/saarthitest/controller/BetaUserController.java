@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/beta")
 @CrossOrigin(origins = "*") // Allow requests from frontend
@@ -31,5 +33,10 @@ public class BetaUserController {
     @GetMapping("/count")
     public ResponseEntity<Long> getCount() {
         return ResponseEntity.ok(betaUserService.getTotalInterestedUsers());
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<BetaUser>> getAllUsers() {
+        return ResponseEntity.ok(betaUserService.getAllUsers());
     }
 }
