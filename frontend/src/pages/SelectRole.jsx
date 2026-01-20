@@ -35,52 +35,159 @@ const SelectRole = () => {
   };
 
   return (
-    <div style={{
-      minHeight: '80vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '2rem'
-    }}>
-      <div className="glass-panel" style={{
-        padding: '3rem',
-        maxWidth: '900px',
-        width: '100%',
-        textAlign: 'center'
-      }}>
-        <h2 className="title-gradient" style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>
-          Choose Your Path
-        </h2>
-        <p style={{ color: 'var(--text-muted)', marginBottom: '3rem', fontSize: '1.1rem' }}>
-          Select your user type to explore our tailored services
-        </p>
+    <>
+      <style>
+        {`
+          .select-role-wrapper {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+          }
+
+          @media (max-width: 768px) {
+            .select-role-wrapper {
+              padding: 1.5rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .select-role-wrapper {
+              padding: 1rem;
+              min-height: auto;
+            }
+          }
+
+          .select-role-panel {
+            padding: 3rem;
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+          }
+
+          @media (max-width: 768px) {
+            .select-role-panel {
+              padding: 2.5rem 2rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .select-role-panel {
+              padding: 2rem 1.5rem;
+            }
+          }
+
+          .select-role-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+          }
+
+          @media (max-width: 768px) {
+            .select-role-title {
+              font-size: 2rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .select-role-title {
+              font-size: 1.75rem;
+            }
+          }
+
+          .select-role-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+          }
+
+          @media (max-width: 768px) {
+            .select-role-subtitle {
+              font-size: 1rem;
+              margin-bottom: 2rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .select-role-subtitle {
+              font-size: 0.95rem;
+            }
+          }
+
+          .select-role-student-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+          }
+
+          @media (max-width: 768px) {
+            .select-role-student-wrapper {
+              margin-top: 1.5rem;
+              margin-bottom: 2rem;
+            }
+          }
+
+          .select-role-others-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+          }
+
+          @media (max-width: 768px) {
+            .select-role-others-grid {
+              grid-template-columns: 1fr;
+              gap: 1.5rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .select-role-others-grid {
+              gap: 1rem;
+            }
+          }
+
+          .select-role-card {
+            background: var(--surface);
+            border: 2px solid var(--glass-border);
+            color: var(--text);
+            padding: 2rem;
+            border-radius: 1rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            text-align: center;
+          }
+
+          @media (max-width: 480px) {
+            .select-role-card {
+              padding: 1.5rem;
+              font-size: 1rem;
+            }
+          }
+        `}
+      </style>
+      <div className="select-role-wrapper">
+        <div className="glass-panel select-role-panel">
+          <h2 className="title-gradient select-role-title">
+            Choose Your Path
+          </h2>
+          <p className="select-role-subtitle">
+            Select your user type to explore our tailored services
+          </p>
 
         {/* Student Button - Top */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginTop: '2rem',
-          marginBottom: '3rem'
-        }}>
+        <div className="select-role-student-wrapper">
           <button
             onClick={() => handleRoleSelect(studentRole.name)}
-            style={{
-              background: 'var(--surface)',
-              border: '2px solid var(--glass-border)',
-              color: 'var(--text)',
-              padding: '2rem',
-              borderRadius: '1rem',
-              fontSize: '1.1rem',
-              transition: 'all 0.3s ease',
-              cursor: 'pointer',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '1rem',
-              textAlign: 'center',
-              maxWidth: '300px',
-              width: '100%'
-            }}
+            className="select-role-card"
+            style={{ maxWidth: '300px' }}
             onMouseOver={(e) => {
               e.currentTarget.style.borderColor = studentRole.color;
               e.currentTarget.style.transform = 'translateY(-5px)';
@@ -118,32 +225,12 @@ const SelectRole = () => {
         </div>
 
         {/* Industry and Institute Buttons - Bottom */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-          gap: '2rem',
-          maxWidth: '700px',
-          margin: '0 auto'
-        }}>
+        <div className="select-role-others-grid">
           {otherRoles.map((role) => (
             <button
               key={role.name}
               onClick={() => handleRoleSelect(role.name)}
-              style={{
-                background: 'var(--surface)',
-                border: '2px solid var(--glass-border)',
-                color: 'var(--text)',
-                padding: '2rem',
-                borderRadius: '1rem',
-                fontSize: '1.1rem',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '1rem',
-                textAlign: 'center'
-              }}
+              className="select-role-card"
               onMouseOver={(e) => {
                 e.currentTarget.style.borderColor = role.color;
                 e.currentTarget.style.transform = 'translateY(-5px)';
@@ -182,6 +269,7 @@ const SelectRole = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

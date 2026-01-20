@@ -3,142 +3,280 @@ import { Users, Target, Rocket, Heart, Sparkles, MapPin, Phone, Mail, Clock, Quo
 
 const About = () => {
   return (
-    <div style={{ 
-      padding: '4rem 2rem', 
-      maxWidth: '1200px', 
-      margin: '0 auto',
-      minHeight: 'calc(100vh - 100px)'
-    }}>
-      {/* Hero Section */}
-      <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-        <h1 className="title-gradient" style={{ 
-          fontSize: '3.5rem', 
-          marginBottom: '1rem', 
-          letterSpacing: '-2px' 
-        }}>
-          About SaarthiX
-        </h1>
-        <p style={{ 
-          color: 'var(--text-muted)', 
-          fontSize: '1.2rem', 
-          maxWidth: '700px', 
-          margin: '0 auto', 
-          lineHeight: '1.6' 
-        }}>
-          Empowering students, institutes, and industry professionals with cutting-edge tools for career success.
-        </p>
-      </div>
+    <>
+      <style>
+        {`
+          .about-container {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: calc(100vh - 100px);
+          }
+
+          @media (max-width: 768px) {
+            .about-container {
+              padding: 3rem 1.5rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .about-container {
+              padding: 2rem 1rem;
+            }
+          }
+
+          .about-hero {
+            text-align: center;
+            margin-bottom: 4rem;
+          }
+
+          @media (max-width: 768px) {
+            .about-hero {
+              margin-bottom: 3rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .about-hero {
+              margin-bottom: 2rem;
+            }
+          }
+
+          .about-hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+          }
+
+          @media (max-width: 768px) {
+            .about-hero-title {
+              font-size: 2.5rem;
+              letter-spacing: -1px;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .about-hero-title {
+              font-size: 2rem;
+              letter-spacing: -0.5px;
+            }
+          }
+
+          .about-hero-text {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+          }
+
+          @media (max-width: 768px) {
+            .about-hero-text {
+              font-size: 1.1rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .about-hero-text {
+              font-size: 1rem;
+            }
+          }
+
+          .about-section {
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border-radius: 1.5rem;
+          }
+
+          @media (max-width: 768px) {
+            .about-section {
+              padding: 2rem;
+              margin-bottom: 2rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .about-section {
+              padding: 1.5rem;
+              margin-bottom: 1.5rem;
+              border-radius: 1rem;
+            }
+          }
+
+          .about-section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+          }
+
+          @media (max-width: 480px) {
+            .about-section-header {
+              gap: 0.75rem;
+              margin-bottom: 1rem;
+            }
+          }
+
+          .about-section-title {
+            font-size: 2rem;
+            color: var(--text);
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+          }
+
+          @media (max-width: 768px) {
+            .about-section-title {
+              font-size: 1.75rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .about-section-title {
+              font-size: 1.5rem;
+            }
+          }
+
+          .about-section-text {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-left: 3rem;
+          }
+
+          @media (max-width: 768px) {
+            .about-section-text {
+              font-size: 1rem;
+              line-height: 1.7;
+              margin-left: 2rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .about-section-text {
+              font-size: 0.95rem;
+              line-height: 1.6;
+              margin-left: 0;
+            }
+          }
+
+          .about-values-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text);
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+          }
+
+          @media (max-width: 768px) {
+            .about-values-title {
+              font-size: 2rem;
+              margin-bottom: 2rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .about-values-title {
+              font-size: 1.75rem;
+              margin-bottom: 1.5rem;
+            }
+          }
+
+          .about-values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+          }
+
+          @media (max-width: 768px) {
+            .about-values-grid {
+              grid-template-columns: 1fr;
+              gap: 1.5rem;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .about-values-grid {
+              gap: 1rem;
+            }
+          }
+
+          .about-value-card {
+            padding: 2rem;
+            border-radius: 1rem;
+          }
+
+          @media (max-width: 480px) {
+            .about-value-card {
+              padding: 1.5rem;
+            }
+          }
+        `}
+      </style>
+      <div className="about-container">
+        {/* Hero Section */}
+        <div className="about-hero">
+          <h1 className="title-gradient about-hero-title">
+            About SaarthiX
+          </h1>
+          <p className="about-hero-text">
+            Empowering students, institutes, and industry professionals with cutting-edge tools for career success.
+          </p>
+        </div>
 
       {/* Who We Are Section */}
-      <div className="glass-panel" style={{ 
-        padding: '3rem', 
-        marginBottom: '3rem',
-        borderRadius: '1.5rem'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+      <div className="glass-panel about-section">
+        <div className="about-section-header">
           <Cpu size={32} style={{ color: 'var(--primary)' }} />
-          <h2 style={{ 
-            fontSize: '2rem', 
-            color: 'var(--text)',
-            background: 'var(--gradient-main)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
-          }}>
+          <h2 className="about-section-title">
             Who We Are?
           </h2>
         </div>
-        <p style={{ 
-          color: 'var(--text-muted)', 
-          fontSize: '1.1rem', 
-          lineHeight: '1.8',
-          marginLeft: '3rem'
-        }}>
+        <p className="about-section-text">
           NITTLABS is a consortium where leaders and ideas converge to innovate and build NexGen products and 
           scalable IT platforms that solve real-world problems.
         </p>
       </div>
 
       {/* Vision Section */}
-      <div className="glass-panel" style={{ 
-        padding: '3rem', 
-        marginBottom: '3rem',
-        borderRadius: '1.5rem'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+      <div className="glass-panel about-section">
+        <div className="about-section-header">
           <Eye size={32} style={{ color: 'var(--primary)' }} />
-          <h2 style={{ 
-            fontSize: '2rem', 
-            color: 'var(--text)',
-            background: 'var(--gradient-main)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
-          }}>
+          <h2 className="about-section-title">
             Vision
           </h2>
         </div>
-        <p style={{ 
-          color: 'var(--text-muted)', 
-          fontSize: '1.1rem', 
-          lineHeight: '1.8',
-          marginLeft: '3rem'
-        }}>
+        <p className="about-section-text">
           To empower every student to be job-ready through guided career planning, structured upskilling, and industry alignment.
         </p>
       </div>
 
       {/* Mission Section */}
-      <div className="glass-panel" style={{ 
-        padding: '3rem', 
-        marginBottom: '3rem',
-        borderRadius: '1.5rem'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+      <div className="glass-panel about-section">
+        <div className="about-section-header">
           <Target size={32} style={{ color: 'var(--primary)' }} />
-          <h2 style={{ 
-            fontSize: '2rem', 
-            color: 'var(--text)',
-            background: 'var(--gradient-main)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
-          }}>
+          <h2 className="about-section-title">
             Mission
           </h2>
         </div>
-        <p style={{ 
-          color: 'var(--text-muted)', 
-          fontSize: '1.1rem', 
-          lineHeight: '1.8',
-          marginLeft: '3rem'
-        }}>
+        <p className="about-section-text">
           To create India's most trusted, AI-enabled collaborative career ecosystem, aligning education, employability, and enterprise growth.
         </p>
       </div>
 
       {/* Values Section */}
       <div style={{ marginBottom: '3rem' }}>
-        <h2 style={{ 
-          fontSize: '2.5rem', 
-          textAlign: 'center',
-          marginBottom: '3rem',
-          color: 'var(--text)',
-          background: 'var(--gradient-main)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text'
-        }}>
+        <h2 className="about-values-title">
           Our Core Values
         </h2>
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-          gap: '2rem',
-          maxWidth: '1000px',
-          margin: '0 auto'
-        }}>
-          <div className="glass-panel" style={{ padding: '2rem', borderRadius: '1rem' }}>
+        <div className="about-values-grid">
+          <div className="glass-panel about-value-card">
             <Handshake size={40} style={{ color: 'var(--primary)', marginBottom: '1rem' }} />
             <h3 style={{ color: 'var(--text)', fontSize: '1.5rem', marginBottom: '0.5rem' }}>
               Honesty
@@ -148,7 +286,7 @@ const About = () => {
             </p>
           </div>
 
-          <div className="glass-panel" style={{ padding: '2rem', borderRadius: '1rem' }}>
+          <div className="glass-panel about-value-card">
             <Shield size={40} style={{ color: 'var(--secondary)', marginBottom: '1rem' }} />
             <h3 style={{ color: 'var(--text)', fontSize: '1.5rem', marginBottom: '0.5rem' }}>
               Integrity
@@ -158,7 +296,7 @@ const About = () => {
             </p>
           </div>
 
-          <div className="glass-panel" style={{ padding: '2rem', borderRadius: '1rem' }}>
+          <div className="glass-panel about-value-card">
             <Users size={40} style={{ color: 'var(--primary)', marginBottom: '1rem' }} />
             <h3 style={{ color: 'var(--text)', fontSize: '1.5rem', marginBottom: '0.5rem' }}>
               Humanity
@@ -171,30 +309,14 @@ const About = () => {
       </div>
 
       {/* What We Do Section */}
-      <div className="glass-panel" style={{ 
-        padding: '3rem', 
-        borderRadius: '1.5rem',
-        marginBottom: '3rem'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
+      <div className="glass-panel about-section">
+        <div className="about-section-header">
           <Sparkles size={32} style={{ color: 'var(--primary)' }} />
-          <h2 style={{ 
-            fontSize: '2rem', 
-            color: 'var(--text)',
-            background: 'var(--gradient-main)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
-          }}>
+          <h2 className="about-section-title">
             What We Do?
           </h2>
         </div>
-        <p style={{ 
-          color: 'var(--text-muted)', 
-          fontSize: '1.1rem', 
-          lineHeight: '1.8',
-          marginLeft: '3rem'
-        }}>
+        <p className="about-section-text">
           SaarthiX, the flagship subscription based NexGen, AI powered Digital Platform of NITTLABS, aims to assist 
           students to be job ready, empowering them and institutes for placements, internships and helping industries 
           to hire role ready talent through series of services thereby bridging the gap between academia and industry verticals.
@@ -628,6 +750,7 @@ const About = () => {
       </div>
 
     </div>
+    </>
   );
 };
 

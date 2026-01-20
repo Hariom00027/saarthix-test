@@ -112,30 +112,103 @@ const ServiceInterestForm = ({ onClose, role, betaUserId, email }) => {
     }
 
     return (
-        <div className="modal-overlay">
-            <div className="glass-panel" style={{
-                padding: '2.5rem',
-                width: '100%',
-                maxWidth: '700px',
-                position: 'relative',
-                maxHeight: '90vh',
-                overflowY: 'auto'
-            }}>
-                <button
-                    onClick={onClose}
-                    style={{
-                        position: 'absolute',
-                        top: '1.5rem',
-                        right: '1.5rem',
-                        background: 'none',
-                        border: 'none',
-                        color: 'var(--text-muted)',
-                        cursor: 'pointer',
-                        zIndex: 10
-                    }}
-                >
-                    <X size={24} />
-                </button>
+        <>
+            <style>
+                {`
+                    .service-interest-panel {
+                        padding: 2.5rem;
+                        width: 100%;
+                        max-width: 700px;
+                        position: relative;
+                        max-height: 90vh;
+                        overflow-y: auto;
+                    }
+
+                    @media (max-width: 768px) {
+                        .service-interest-panel {
+                            padding: 2rem;
+                            max-width: 90%;
+                        }
+                    }
+
+                    @media (max-width: 480px) {
+                        .service-interest-panel {
+                            padding: 1.5rem;
+                            max-width: 95%;
+                            max-height: 85vh;
+                        }
+                    }
+
+                    .service-interest-close-btn {
+                        position: absolute;
+                        top: 1.5rem;
+                        right: 1.5rem;
+                        background: none;
+                        border: none;
+                        color: var(--text-muted);
+                        cursor: pointer;
+                        z-index: 10;
+                    }
+
+                    @media (max-width: 480px) {
+                        .service-interest-close-btn {
+                            top: 1rem;
+                            right: 1rem;
+                        }
+                    }
+
+                    .service-interest-card {
+                        padding: 1.5rem;
+                        background: rgba(0, 0, 0, 0.2);
+                        border-radius: 12px;
+                        border: 1px solid var(--glass-border);
+                    }
+
+                    @media (max-width: 480px) {
+                        .service-interest-card {
+                            padding: 1.25rem;
+                        }
+                    }
+
+                    .service-interest-options {
+                        display: flex;
+                        gap: 1rem;
+                        flex-wrap: wrap;
+                    }
+
+                    @media (max-width: 480px) {
+                        .service-interest-options {
+                            gap: 0.75rem;
+                        }
+                    }
+
+                    .service-interest-option-btn {
+                        padding: 0.6rem 1.2rem;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                        font-size: 0.9rem;
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                    }
+
+                    @media (max-width: 480px) {
+                        .service-interest-option-btn {
+                            padding: 0.5rem 1rem;
+                            font-size: 0.85rem;
+                        }
+                    }
+                `}
+            </style>
+            <div className="modal-overlay">
+                <div className="glass-panel service-interest-panel">
+                    <button
+                        onClick={onClose}
+                        className="service-interest-close-btn"
+                    >
+                        <X size={24} />
+                    </button>
 
                 <h2 className="title-gradient" style={{ marginBottom: '0.5rem', paddingRight: '2rem' }}>
                     Tell Us Your Interests
@@ -146,12 +219,7 @@ const ServiceInterestForm = ({ onClose, role, betaUserId, email }) => {
 
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                     {services.map((service, index) => (
-                        <div key={service.id || index} style={{
-                            padding: '1.5rem',
-                            background: 'rgba(0, 0, 0, 0.2)',
-                            borderRadius: '12px',
-                            border: '1px solid var(--glass-border)'
-                        }}>
+                        <div key={service.id || index} className="service-interest-card">
                             <h3 style={{ 
                                 color: 'white', 
                                 fontSize: '1.1rem', 
@@ -161,11 +229,7 @@ const ServiceInterestForm = ({ onClose, role, betaUserId, email }) => {
                                 {service.title}
                             </h3>
                             
-                            <div style={{ 
-                                display: 'flex', 
-                                gap: '1rem', 
-                                flexWrap: 'wrap'
-                            }}>
+                            <div className="service-interest-options">
                                 {interestOptions.map((option) => {
                                     const isSelected = serviceInterests[service.id] === option.value;
                                     return (
@@ -173,21 +237,14 @@ const ServiceInterestForm = ({ onClose, role, betaUserId, email }) => {
                                             key={option.value}
                                             type="button"
                                             onClick={() => handleInterestChange(service.id, option.value)}
+                                            className="service-interest-option-btn"
                                             style={{
-                                                padding: '0.6rem 1.2rem',
-                                                borderRadius: '8px',
                                                 border: `2px solid ${isSelected ? option.color : 'rgba(255, 255, 255, 0.2)'}`,
                                                 background: isSelected 
                                                     ? `${option.color}20` 
                                                     : 'transparent',
                                                 color: isSelected ? option.color : 'var(--text-muted)',
-                                                cursor: 'pointer',
-                                                transition: 'all 0.2s ease',
-                                                fontSize: '0.9rem',
-                                                fontWeight: isSelected ? '600' : '400',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                gap: '0.5rem'
+                                                fontWeight: isSelected ? '600' : '400'
                                             }}
                                             onMouseEnter={(e) => {
                                                 if (!isSelected) {
@@ -237,6 +294,7 @@ const ServiceInterestForm = ({ onClose, role, betaUserId, email }) => {
                 </form>
             </div>
         </div>
+        </>
     );
 };
 
